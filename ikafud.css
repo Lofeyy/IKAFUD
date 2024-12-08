@@ -1,0 +1,190 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+header {
+    background-color: #FF6B6B;
+    color: white;
+    padding: 20px 0; /* Adjust padding for overall height */
+    text-align: center; /* Center the header content */
+}
+
+.header-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header h1 {
+    margin: 0; /* Remove default margin for the heading */
+    font-size: 2.5em; /* Increase font size for the title */
+}
+
+header nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0; /* Add margin between title and nav */
+    display: flex;
+    justify-content: center; /* Center navigation items */
+}
+
+header nav ul li {
+    margin: 0 15px; /* Space out the menu items */
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: bold;
+    font-size: 1.2em; /* Increase font size for links */
+}
+
+header nav ul li a:hover {
+    color: #FFCDD2; /* Change color on hover */
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+    header nav ul {
+        flex-direction: column; /* Stack items on small screens */
+    }
+
+    header nav ul li {
+        margin: 5px 0; /* Add vertical spacing */
+    }
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+
+.search-bar {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.search-bar input {
+    flex-grow: 1;
+    margin-right: 10px;
+    padding: 10px;
+    border: 1px solid #FF6B6B;
+    border-radius: 4px;
+}
+
+.search-bar button {
+    background-color: #FF6B6B;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100px;
+}
+
+.meal-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+}
+
+.meal {
+    background-color: #FFCDD2;
+    border-radius: 4px;
+    padding: 10px;
+    text-align: center;
+}
+
+.meal img {
+    max-width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+footer {
+    background-color: #FF6B6B;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 600px) {
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header nav ul {
+        flex-direction: column;
+        width: 100%; /* Make the menu full width */
+    }
+
+    header nav ul li {
+        margin: 5px 0; /* Adjust margin for smaller screens */
+    }
+
+    .meal-list {
+        grid-template-columns: 1fr; /* Stack meals in a single column */
+    }
+
+    .search-bar {
+        flex-direction: column; /* Stack the search bar elements */
+    }
+
+    .search-bar input {
+        margin-right: 0; /* Remove right margin */
+        margin-bottom: 10px; /* Add bottom margin for spacing */
+        width: 100%; /* Full width for input */
+    }
+
+    .search-bar button {
+        width: 100%; /* Full width for button */
+    }
+
+    .modal-content {
+        width: 90%; /* Make modal content responsive */
+    }
+}
