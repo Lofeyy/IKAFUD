@@ -1,12 +1,28 @@
 <?php
-session_start();
+// session_start();
+include 'database_connection.php'; // Include the database connection
+
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php"); // Redirect to login if not logged in
+    exit();
+}
 
 // Handle meal deletion
 if (isset($_GET['remove'])) {
     $mealToRemove = $_GET['remove'];
+    $userId = $_SESSION['user_id'];
+
+    // Remove from session favorites
     if (isset($_SESSION['favorites'])) {
         $_SESSION['favorites'] = array_diff($_SESSION['favorites'], [$mealToRemove]);
     }
+
+    // Remove from database
+    $stmt = $conn->prepare("DELETE FROM favorites WHERE user_id = ? AND meal_name = ?");
+    $stmt->bind_param("is", $userId, $mealToRemove);
+    $stmt->execute();
+    $stmt->close();
+
     header("Location: favorites.php"); // Redirect to the favorites page to reflect changes
     exit;
 }
@@ -18,8 +34,20 @@ if (isset($_GET['clear'])) {
     exit;
 }
 
-// Retrieve favorites from session
-$favorites = isset($_SESSION['favorites']) ? $_SESSION['favorites'] : [];
+// Retrieve favorites from database
+$favorites = [];
+$userId = $_SESSION['user_id'];
+$stmt = $conn->prepare("SELECT meal_name FROM favorites WHERE user_id = ?");
+$stmt->bind_param("i", $userId);
+$stmt->execute();
+$result = $stmt->get_result();
+
+while ($row = $result->fetch_assoc()) {
+    $favorites[] = $row['meal_name'];
+}
+
+$stmt->close(); // Close the statement
+$conn->close(); // Close the database connection
 ?>
 
 <!DOCTYPE html>
@@ -149,8 +177,8 @@ $favorites = isset($_SESSION['favorites']) ? $_SESSION['favorites'] : [];
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="favorites.php">Favorites</a></li>
-                <li><a href="signup.php">Sign Up</a></li>
                 <li><a href="login.php">Login</a></li>
+                <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
     </div>

@@ -1,6 +1,10 @@
 <?php
 // Start the session if you'll be using session variables
 session_start();
+if (!isset($_SESSION['user_id'])) {
+  header("Location: login.php"); // Redirect to login if not logged in
+  exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -170,8 +174,8 @@ session_start();
         <ul>
           <li><a href="index.php">Home</a></li>
           <li><a href="favorites.php">Favorites</a></li>
-          <li><a href="signup.php">Sign Up</a></li>
           <li><a href="login.php">Login</a></li>
+          <li><a href="logout.php">Logout</a></li>
         </ul>
       </nav>
     </div>

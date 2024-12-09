@@ -2,6 +2,9 @@
 // Start the session if you'll be using session variables
 session_start();
 
+// Optionally, check if the user is logged in
+$is_logged_in = isset($_SESSION['user_id']);
+
 // Get the meal data from the URL parameters
 $mealName = isset($_GET['name']) ? htmlspecialchars($_GET['name']) : 'Meal not found';
 $mealImage = isset($_GET['image']) ? htmlspecialchars($_GET['image']) : '';
@@ -157,8 +160,8 @@ $instructions = isset($_GET['instructions']) ? htmlspecialchars($_GET['instructi
         <ul>
           <li><a href="index.php">Home</a></li>
           <li><a href="favorites.php">Favorites</a></li>
-          <li><a href="signup.php">Sign Up</a></li>
           <li><a href="login.php">Login</a></li>
+          <li><a href="logout.php">Logout</a></li>
         </ul>
       </nav>
     </div>
